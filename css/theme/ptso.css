@@ -104,6 +104,9 @@ body {
 /*********************************************
  * NAVIGATION CONTROLS
  *********************************************/
+.reveal .controls {
+  visibility: hidden; }
+
 .reveal .controls div.navigate-left,
 .reveal .controls div.navigate-left.enabled {
   border-right-color: #13daec; }
@@ -135,6 +138,9 @@ body {
 /*********************************************
  * PROGRESS BAR
  *********************************************/
+.reveal .progress {
+  visibility: hidden; }
+
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2); }
 
