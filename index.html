@@ -13,7 +13,7 @@
 
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
-        <link href='http://fonts.googleapis.com/css?family=Raleway:600|Inconsolata' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:600|Inconsolata' rel='stylesheet' type='text/css'>
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -1069,12 +1069,12 @@
 					<p class='qtitle'>Problema receber arquivo (Upload) no java via ajax (rest)</p>
 					<p class='qurl'>http://pt.stackoverflow.com/q/25439</p>
 				</section>
-				
+
 			</div>
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="js/reveal.min.js"></script>
 
 		<script>
@@ -1086,11 +1086,11 @@
 				progress: false,
 				history: false,
 				center: true,
-                loop: true,
+				loop: true,
 				theme: 'ptso', // available themes are in /css/theme
 				transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
-                autoSlide: 9000,
-                center: false,
+				autoSlide: 9000,
+				center: false,
 
 				// Parallax scrolling
 				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
@@ -1106,24 +1106,36 @@
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
-            
-            Reveal.addEventListener('ready', function(event) {
-                // Declare a function to randomize a jQuery list of elements
-                // see http://stackoverflow.com/a/11766418/472021 for details           
-                $.fn.randomize = function(selector){
-                    (selector ? this.find(selector) : this).parent().each(function(){
-                        $(this).children(selector).sort(function(){
-                            return Math.random() - 0.5;
-                        }).detach().appendTo(this);
-                    });
+			
+			Reveal.addEventListener('ready', function(event) {
+				// Declare a function to randomize a jQuery list of elements
+				// see http://stackoverflow.com/a/11766418/472021 for details           
+				$.fn.randomize = function(selector){
+					(selector ? this.find(selector) : this).parent().each(function(){
+						$(this).children(selector).sort(function(){
+							return Math.random() - 0.5;
+						}).detach().appendTo(this);
+					});
 
-                    return this;
-                };
+					return this;
+				};
 
-                // call our new method on all sections inside of the main slides element.
-                $(".slides > section").randomize();
-            })
+				// call our new method on all sections inside of the main slides element.
+				$(".slides > section").randomize();
+			});
 
+			var wasLastPageHit = false;
+			Reveal.addEventListener('slidechanged', function(event) {           
+				if (wasLastPageHit) {
+					window.location.reload();
+				}		
+				
+				if($(event.currentSlide).is(":last-child")) {
+					// The newly opened slide is the last one, set up a marker
+					// so the next time this method is called we can refresh.
+					wasLastPageHit = true;
+				}
+			});
 		</script>
 
 	</body>
