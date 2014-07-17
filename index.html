@@ -1074,6 +1074,7 @@
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="js/reveal.min.js"></script>
 
 		<script>
@@ -1081,13 +1082,15 @@
 			// Full list of configuration options available here:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
+				controls: false,
+				progress: false,
+				history: false,
 				center: true,
-
+                loop: true,
 				theme: 'ptso', // available themes are in /css/theme
 				transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
+                autoSlide: 9000,
+                center: false,
 
 				// Parallax scrolling
 				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
@@ -1103,28 +1106,23 @@
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
+            
+            Reveal.addEventListener('ready', function(event) {
+                // Declare a function to randomize a jQuery list of elements
+                // see http://stackoverflow.com/a/11766418/472021 for details           
+                $.fn.randomize = function(selector){
+                    (selector ? this.find(selector) : this).parent().each(function(){
+                        $(this).children(selector).sort(function(){
+                            return Math.random() - 0.5;
+                        }).detach().appendTo(this);
+                    });
 
-			Reveal.addEventListener('ready', function(event) {
-				// For the first slide
-				printNotes(event);
-			});
+                    return this;
+                };
 
-			Reveal.addEventListener('slidechanged', function(event) {
-				// For every other slide
-				printNotes(event);
-			});
-
-			function printNotes(event) {
-				var notes = event.currentSlide.querySelector(".notes");
-				if(notes) {
-					pageNotes = "";
-					notesList = notes.querySelectorAll("li")
-					for (i = 0; i< notesList.length; i++)
-						pageNotes += notesList[i].innerHTML + "\n\n";
-					console.info(pageNotes);
-				}
-			};
-
+                // call our new method on all sections inside of the main slides element.
+                $(".slides > section").randomize();
+            })
 
 		</script>
 

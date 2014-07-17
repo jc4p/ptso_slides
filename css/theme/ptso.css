@@ -32,15 +32,13 @@ body {
   font-family: 'Raleway', sans-serif;
   font-size: 60px;
   position: relative;
-  top: -100px;
-  text-align:center; }
+  top: -100px; }
 
 .reveal .qurl {
   font-family: 'Inconsolata', monospace;
   font-size: 30px;
   position: relative;
-  top: 200px;
-  text-align:center;}
+  top: 200px; }
 
 /*********************************************
  * HEADERS
@@ -104,9 +102,6 @@ body {
 /*********************************************
  * NAVIGATION CONTROLS
  *********************************************/
-.reveal .controls {
-  visibility: hidden; }
-
 .reveal .controls div.navigate-left,
 .reveal .controls div.navigate-left.enabled {
   border-right-color: #13daec; }
@@ -138,9 +133,6 @@ body {
 /*********************************************
  * PROGRESS BAR
  *********************************************/
-.reveal .progress {
-  visibility: hidden; }
-
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2); }
 
